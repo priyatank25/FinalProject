@@ -1,0 +1,108 @@
+
+<div class="container-fluid mycontainer" style="background-image: url('../../assets/v1016-a-08.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; min-height: 100vh;">
+<button type="button " class="btn btn-secondary mt-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-left: 15px;">
+  Add Portfolio<img src="../assets/addportfolio.png" alt="" width="30" height="30">
+</button>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Portfolio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- <form [formGroup]="myForm" (ngSubmit)="addPortfolio(myForm.value)">
+        <div class="row">
+          <div class="col-6">
+            <label>User Name:</label>
+            <br>
+            <label>Portfolio Name:</label>
+          </div>
+          <div class="col-6">
+            <input formControlName="userName">
+            <input formControlName="portfolioName">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form> -->
+      <form [formGroup]="myForm" (ngSubmit)="addPortfolio(myForm.value)">
+        <div class="form-group">
+          <label for="userName">User Name:</label>
+          <input type="text" class="form-control" id="userName" formControlName="userName" [ngClass]="{'is-invalid': myForm.get('userName')?.invalid && myForm.get('userName')?.touched}">
+          <div *ngIf="myForm.get('userName')?.errors?.['required'] && myForm.get('userName')?.touched" class="text-danger">User Name is required.</div>
+        </div>
+        <div class="form-group">
+          <label for="portfolioName">Portfolio Name:</label>
+          <input type="text" class="form-control" id="portfolioName" formControlName="portfolioName" [ngClass]="{'is-invalid': myForm.get('portfolioName')?.invalid && myForm.get('portfolioName')?.touched}">
+          <div *ngIf="myForm.get('portfolioName')?.errors?.['required'] && myForm.get('portfolioName')?.touched" class="text-danger">Portfolio Name is required.</div>
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> &nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Add</button>
+      </form>
+      
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <!-- <div class="row">   
+  <div class="card text-center col-4 mb-4" *ngFor="let pf of portfolios">
+    <div class="card-body">
+      <h5 class="card-title">{{pf.portfolioName}}</h5>
+      <p class="card-text">Invested :- </p>
+      <p class="card-text">Current :- </p>
+      <a [routerLink]="['/viewstocks',pf.portfolioId]" class="btn btn-primary">View Portfolio</a>
+    </div>
+  </div>
+</div> -->
+
+
+  <!-- <div class="row">
+
+    <div class="col-md-4 col-sm-6 content-card" *ngFor="let pf of portfolios">
+      <div class="card-big-shadow">
+        <div class="card card-just-text" data-background="color" data-color="brown" data-radius="none">
+          <div class="content">
+            <h6 class="category">{{pf.portfolioName}}</h6>
+            <p class="card-text">Invested :- </p>
+            <p class="card-text">Current :- </p>
+            <a [routerLink]="['/viewstocks',pf.portfolioId]" class="btn btn-secondary btn-block btn-round">View Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="row">
+    <div class="col-md-4 col-sm-6">
+      <a [routerLink]="['/viewstocks', pf.portfolioId]" class="btn btn-secondary btn-block btn-round content-card" *ngFor="let pf of portfolios">
+         <div class="content">
+              <h6 class="category">{{pf.portfolioName}}</h6>
+              
+        </div>
+      </a>
+    </div>
+  </div> -->
+  <div class="row">
+  <div class="col-xl-3 col-lg-6 mt-4" *ngFor="let pf of portfolios">
+    <div class="card l-bg-orange-dark">
+        <div class="card-statistic-3 p-4">
+            <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+            <div class="mb-4">
+                <h5 class="card-title mb-0" style="text-align: center;">{{pf.portfolioName}}</h5>
+                <p class="card-text">Invested :- </p>
+            <p class="card-text">Current :- </p>
+            <a [routerLink]="['/viewstocks',pf.portfolioId]" class="btn btn-secondary mt-4 buttn">View Portfolio</a>
+            <a (click)="deletePortfolio(pf.portfolioId)" class="btn btn-danger mt-4 ">Delete</a>
+            <!-- <button (click)="deletePortfolio(pf.portfolioId)" class="btn btn-danger">Delete</button> -->
+
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>

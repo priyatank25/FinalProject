@@ -1,0 +1,23 @@
+<div style="position: sticky;" >
+  <div style="margin-bottom: 0; background-color: rgb(93, 94, 97);">
+    <marquee>
+      <ng-container *ngFor="let quote of stockQuotes">
+        <span style="color:  #ffffff">{{ quote.symbol }}: {{ quote.currentPrice !== undefined ? ('$' +
+          quote.currentPrice.toFixed(2)) : 'N/A' }}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </ng-container>
+    </marquee>
+  </div>
+  <nav class="navbar" style="margin-top: 0px;  ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="../assets/portfolio2.png" alt="" width="50" height="40" />
+      </a>
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+    </div>
+  </nav>
+</div>
+<router-outlet></router-outlet>

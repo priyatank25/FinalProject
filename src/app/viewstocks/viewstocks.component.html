@@ -1,0 +1,184 @@
+<div
+  style="background-image: url('../../assets/v1016-a-08.jpg'); background-repeat: no-repeat; background-size:cover; min-height: 100vh; ">
+  <div class="container-fluid">
+    <button type="button " class="btn btn-secondary mt-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+      style="margin-left: 15px;">
+      +Add Investment<img src="../assets/addportfolio.png" alt="" width="30" height="30">
+    </button>
+
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Stock</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="myForm" (ngSubmit)="addStock(myForm.value)">
+           
+            <div class="form-group">
+              <label for="stockName">Stock Name:</label>
+              <input type="text" class="form-control" id="stockName" formControlName="stockName">
+              <div *ngIf="myForm.get('stockName')?.errors?.['required'] && myForm.get('stockName')?.touched"
+                class="text-danger">Stock Name is required.</div>
+            </div>
+
+           
+            <div class="form-group">
+              <label for="stockPrice">Stock Price:</label>
+              <input type="text" class="form-control" id="stockPrice" formControlName="stockPrice">
+              <div *ngIf="myForm.get('stockPrice')?.errors?.['required'] && myForm.get('stockPrice')?.touched"
+                class="text-danger">Stock Price is required.</div>
+              <div *ngIf="myForm.get('stockPrice')?.errors?.['pattern'] && myForm.get('stockPrice')?.touched"
+                class="text-danger">Invalid Stock Price.</div>
+            </div>
+
+            
+            <div class="form-group">
+              <label for="stockQuantity">Stock Quantity:</label>
+              <input type="text" class="form-control" id="stockQuantity" formControlName="stockQuantity">
+              <div *ngIf="myForm.get('stockQuantity')?.errors?.['required'] && myForm.get('stockQuantity')?.touched"
+                class="text-danger">Stock Quantity is required.</div>
+              <div *ngIf="myForm.get('stockQuantity')?.errors?.['pattern'] && myForm.get('stockQuantity')?.touched"
+                class="text-danger">Invalid Stock Quantity.</div>
+            </div>
+
+            
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> &nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+   
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Purchase Price</th>
+            <th scope="col">Purchase Value</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of mystocks">
+            <td>{{stock.stockName}}</td>
+            <td>{{stock.stockQuantity}}</td>
+            <td>{{stock.stockPrice}}</td>
+            <td>{{stock.stockPrice * stock.stockQuantity}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteStock(stock.stockid,stock.portfolioId)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- <div style="background-image: url('../../assets/v1016-a-08.jpg'); background-repeat: no-repeat; background-size: cover; min-height: 100vh;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-secondary mt-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+          style="margin-left: 15px;">
+          + Add Investment <img src="../assets/addportfolio.png" alt="" width="30" height="30">
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Stock</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form [formGroup]="myForm" (ngSubmit)="addStock(myForm.value)">
+           
+            <div class="form-group">
+              <label for="stockName">Stock Name:</label>
+              <input type="text" class="form-control" id="stockName" formControlName="stockName">
+              <div *ngIf="myForm.get('stockName')?.errors?.['required'] && myForm.get('stockName')?.touched"
+                class="text-danger">Stock Name is required.</div>
+            </div>
+
+           
+            <div class="form-group">
+              <label for="stockPrice">Stock Price:</label>
+              <input type="text" class="form-control" id="stockPrice" formControlName="stockPrice">
+              <div *ngIf="myForm.get('stockPrice')?.errors?.['required'] && myForm.get('stockPrice')?.touched"
+                class="text-danger">Stock Price is required.</div>
+              <div *ngIf="myForm.get('stockPrice')?.errors?.['pattern'] && myForm.get('stockPrice')?.touched"
+                class="text-danger">Invalid Stock Price.</div>
+            </div>
+
+            
+            <div class="form-group">
+              <label for="stockQuantity">Stock Quantity:</label>
+              <input type="text" class="form-control" id="stockQuantity" formControlName="stockQuantity">
+              <div *ngIf="myForm.get('stockQuantity')?.errors?.['required'] && myForm.get('stockQuantity')?.touched"
+                class="text-danger">Stock Quantity is required.</div>
+              <div *ngIf="myForm.get('stockQuantity')?.errors?.['pattern'] && myForm.get('stockQuantity')?.touched"
+                class="text-danger">Invalid Stock Quantity.</div>
+            </div>
+
+            
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> &nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+         
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table table-hover">
+
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Purchase Price</th>
+                  <th scope="col">Purchase Value</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let stock of mystocks">
+                  <td>{{stock.stockName}}</td>
+                  <td>{{stock.stockQuantity}}</td>
+                  <td>{{stock.stockPrice}}</td>
+                  <td>{{stock.stockPrice * stock.stockQuantity}}</td>
+                  <td>
+                    <button class="btn btn-danger" (click)="deleteStock(stock.stockid,stock.portfolioId)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div> -->
